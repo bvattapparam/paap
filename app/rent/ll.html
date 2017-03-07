@@ -1,0 +1,35 @@
+
+    <section>
+  <div class="page-header">
+    <h1><i class="fa fa-building"></i>{{'rent.ll.pageheader' | i18n}}</h1>
+    <p class="lead">
+      {{'cnt.rent.ll.pageheader' | i18n}}
+    </p>
+  </div>
+</section>
+
+
+  <div class="accordian" data-ng-repeat = "ll in llData">
+  <div class="card no-margin white-stage" style="overflow:auto; padding:20px">
+    <div class="col-lg-4">
+      <div class="col-sm-12 text-center">
+        <img src='../img/builder.png' class="ll-image" data-ng-if="ll.type === '1'">
+        <img src='../img/male.png' class="ll-image" data-ng-if="ll.type === '2'">
+        <img src='../img/female.png' class="ll-image" data-ng-if="ll.type === '3'">
+      </div>
+        <div class="col-sm-12 title-name text-center" data-ng-bind="ll.name">Name</div>
+        <div class="col-sm-12 status-box text-center border-top" ng-class="settings.text_status[ll.status]"><i class="fa fa-circle"></i>{{ll.status | reverseCode : reference.landlordStatus}}</div>
+        <div class="col-sm-12 text-center control-box borde r-bottom"><a data-ng-href="#/rent-details/{{ll.llcode}}"><i class="fa fa-edit"></i>Edit</a>  <a ng-click="" href=""><i class="fa fa-eye"></i>Watch</a></div>
+        <!--div class="col-sm-12">{{ll.status}}</div-->
+    </div>
+    <div class="col-lg-8 details-box">
+      <div class="col-sm-3 label-text">DOP :</div><div class="col-sm-9">{{ll.dop | aswaDate}}</div>
+      <div class="col-sm-3 label-text">Contact :</div><div class="col-sm-9">{{ll.contact}}</div>
+      <div class="col-sm-12 label-text">Address : <span data-ng-bind="ll.address"></span></div>
+      <div class="col-sm-12 label-text">comment : <span>{{ll.comment}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>

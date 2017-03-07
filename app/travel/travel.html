@@ -1,0 +1,86 @@
+<section>
+  <div class="row header-container">
+    <div class="col-sm-3">
+      <div>
+        <h1><i class="fa fa-tachometer"></i><span data-ng-bind-html ="'travel.pageheader' | i18n"></span></h1>
+      </div>
+    </div>
+    <div class="col-sm-8" style="text-align:right">
+        <ol class="breadcrumb"> 
+          <li class="active"> <a href="#" data-ng-href="#/dashboard"><i class="fa fa-home"></i> {{'breadcrumb.dashboard' | i18n}}</a> </li> 
+          <li class="active"> <strong>{{'breadcrumb.travel' | i18n}}</strong> </li> 
+        </ol> 
+    </div>
+    <div class="col-sm-1 text-right">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+    </div>
+  </div>
+</section>
+
+
+<section class="main-content p-t-none">
+  <div id="dashboard" class="generic-container">
+    <div class="generic-card no-margin">
+          <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add"><i class="action-icon-primary fa fa-plus" ng-click="open('sm')"></i></div>
+          <div class="form-group pull-right actions col-sm-3">
+            <select tabindex="8" class="form-control" ui-select2="common.select2ClearWithoutSearch" data-ng-model="search.status" placeholder = "{{'filter.placeholder.filterstatus' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.travelStatus" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+           <h3 class="table-title" ng-bind-template="{{totalItems}} {{'cnt.rows' | i18n}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small">
+              <colgroup>
+                <col class="auto-cell-size p-r-20">
+              </colgroup>
+              <thead>
+              <tr>
+                <th data-ng-bind-html="'travel.tbl.icon' | i18n"></th>
+                <th data-ng-bind-html="'travel.tbl.source' | i18n"></th>
+                <th data-ng-bind-html="'travel.tbl.destination' | i18n"></th>
+                <th data-ng-bind-html="'travel.tbl.pnr' | i18n"></th>
+                <th data-ng-bind-html="'travel.tbl.traveldate' | i18n"></th>
+                <th data-ng-bind-html="'travel.tbl.bookeddate' | i18n"></th>
+                <th data-ng-bind-html="'travel.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'travel.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr data-ng-repeat="rel in travelData" ng-class="{'selected-row':$index == selectedRow}" ng-click="setClickedRow($index)">
+                <td class="f20 part1"><i class="round-icon fa fa-{{travelRef.referencesDataMap.travelIcon[rel.icon]}}" ng-class="settings.travel_status[rel.status]" tooltip="{{travelRef.referencesDataMap.travelStatus[rel.status]}}"></i></td>
+                <td data-ng-bind="rel.source">Chennai</td>
+                <td data-ng-bind="rel.destination">Kerala</td>
+                <td data-ng-bind="rel.pnr">TNIS003433</td>
+                <td data-ng-bind="rel.traveldate | aswaDate"></td>
+                <td data-ng-bind="rel.bookeddate | aswaDate">12-June-2015</td>
+                <td data-ng-bind="rel.amount | aswaCurrency">Open</td>
+                <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon-small-secondary fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon-small-secondary fa fa-edit" tooltip="{{'tooltip.edit' | i18n}}" ng-click="editTravel(rel)"></i>
+                  <i class="action-icon-small-secondary fa fa-trash" tooltip="{{'tooltip.trash' | i18n}}" ng-click="showInfoBox('Info', 'generalinfoone', 'sm')"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h4>Pager</h4>
+          <pre>You are currently on page {{currentPage}}</pre>
+          <ul pager total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" num-pages="numPages" max-size="maxSize" items-per-page="limit"></ul>
+        </div>
+
+        <div class="row">
+          <pagination total-items="totalItems" ng-model="currentPage"  num-pages="numPages" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" rotate="false" ng-change="pageChanged()" items-per-page="limit" first-text="<<" last-text=">>" next-text=">" previous-text="<"></pagination>
+          <ul class="pagination-sm pagination pull-right">
+            <li class="ng-scope disabled"><a href="" ng-click="selectPage(1, $event)" class="ng-binding">Page</a></li>
+            <li class="ng-scope disabled"><span class="ng-binding">{{currentPage}} / {{numPages}}</span></li>
+          </ul>
+        </div>
+
+  </div>
+</section>

@@ -1,0 +1,106 @@
+<section>
+  <div class="row header-container">
+    <div class="col-sm-3">
+      <div>
+        <h1><i class="fa fa-tachometer"></i><span data-ng-bind-html ="'flat.pageheader' | i18n"></span></h1>
+      </div>
+    </div>
+    <div class="col-sm-8" style="text-align:right">
+        <ol class="breadcrumb"> 
+          <li class="active"> <strong><i class="fa fa-home"></i> {{'breadcrumb.dashboard' | i18n}}</strong> </li> 
+        </ol> 
+    </div>
+    <div class="col-sm-1 text-right">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+    </div>
+  </div>
+</section>
+
+<section class=" p-t-none">
+    <div class="col-sm-6 no-l-pd" ng-include src="'flat/containers/basicdetails.html'"></div>
+     <div class="col-sm-6 no-l-pd no-r-pd " ng-include src="'flat/containers/address.html'"></div>
+   
+</section>
+
+<section class="p-t-none" id="panel-stickers">
+    <div class="col-sm-3 no-l-pd no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-nine.html'"></div>
+    </div>
+    <div class="col-sm-3  no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-ten.html'"></div>
+    </div>
+    <div class="col-sm-3 ">
+      <div ng-include src="'dashboard/containers/panel-eleven.html'"></div>
+    </div>
+    <div class="col-sm-3 no-l-pd no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-twelve.html'"></div>
+    </div>
+  
+   
+  </section>
+
+
+
+
+<section class="main-content p-t-none">
+  <div id="dashboard" class="generic-container">
+    <div class="generic-card no-margin">
+          <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add"><i class="action-icon-primary fa fa-plus" ng-click="addFlatBasicPayment('sm')"></i></div>
+           <h3 class="table-title" ng-bind-template="{{'cnt.rows' | i18n}} {{flatBO.flatBasicPaymentData.length}} | {{'cnt.total' | i18n}} {{getGrandTotal.getGrandTotalBO.FLATBASIC_PAYMENT_TOTAL | aswaCurrency}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small">
+              <colgroup>
+                <col class="auto-cell-size">
+              </colgroup>
+              <thead>
+              <tr>
+                 <th></th>
+                <th data-ng-bind-html="'flat.tbl.paiddate' | i18n"></th>
+                <th data-ng-bind-html="'flat.tbl.mode' | i18n"></th>
+                <th data-ng-bind-html="'flat.tbl.chequeno' | i18n"></th>
+                <th data-ng-bind-html="'flat.tbl.ddno' | i18n"></th>
+                <th data-ng-bind-html="'flat.tbl.wire' | i18n"></th>
+                <th data-ng-bind-html="'flat.tbl.mchno' | i18n"></th>
+                 <th data-ng-bind-html="'flat.tbl.purpose' | i18n"></th>
+                <th data-ng-bind-html="'flat.tbl.receiptno' | i18n"></th>
+                <th data-ng-bind-html="'flat.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'flat.tbl.contactperson' | i18n"></th>
+                <th data-ng-bind-html="'travel.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in flatBO.flatBasicPaymentData " ng-class="{'selected-row':$index == selectedRow}" ng-click="setClickedRow($index)">
+               <td></td>
+                <td data-ng-bind="rel.PAID_DATE | aswaDate">Chennai</td>
+                <td data-ng-bind="getRef.referencesDataMap.paymentMode[rel.MODE]">Kerala</td>
+                <td data-ng-bind="rel.CHEQUE_NUMBER">TNIS003433</td>
+                <td data-ng-bind="rel.DD_NUMBER"></td>
+                <td data-ng-bind="rel.WIRETRANSFER_ID">12-June-2015</td>
+                <td data-ng-bind="rel.MCH_NUMBER">12-June-2015</td>
+                <td data-ng-bind="rel.PURPOSE" class="text-capitalize">12-June-2015</td>
+                <td data-ng-bind="rel.RECEIPT_NUMBER">12-June-2015</td>
+                <td data-ng-bind="rel.AMOUNT | aswaCurrency">Open</td>
+                <td data-ng-bind="rel.CONTACT_PERSON" class="text-uppercase">12-June-2015</td>
+                <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon-small-secondary fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon-small-secondary fa fa-edit" tooltip="{{'tooltip.edit' | i18n}}" ng-click="editFlatBasicPayment(rel)"></i>
+                  <i class="action-icon-small-secondary fa fa-trash" tooltip="{{'tooltip.trash' | i18n}}" ng-click="showInfoBox('Info', 'generalinfoone', 'sm')"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+       <div class="row">
+        <pagination total-items="totalItems" ng-model="currentPage"  num-pages="numPages" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" rotate="false" ng-change="pageChanged()" items-per-page="limit" first-text="<<" last-text=">>" next-text=">" previous-text="<"></pagination>
+        <ul class="pagination-sm pagination pull-right">
+          <li class="ng-scope disabled"><a href="" ng-click="selectPage(1, $event)" class="ng-binding">Page</a></li>
+          <li class="ng-scope disabled"><span class="ng-binding">{{currentPage}} / {{numPages}}</span></li>
+        </ul>
+      </div>
+
+  </div>
+</section>

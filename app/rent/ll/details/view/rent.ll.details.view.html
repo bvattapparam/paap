@@ -1,0 +1,55 @@
+<section>
+  <div class="row">
+    <div class="col-sm-11">
+      <div class="page-header">
+    <h1><i class="fa fa-building"></i>{{'rent.ll.pageheader' | i18n}}</h1>
+      <p class="lead" data-ng-bind-html="'cnt.rent.ll.pageheader' | i18n" />
+  </div>
+    </div>
+    <div class="col-sm-1 text-right">
+      <div class="row">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-12 bottom-border" /></div>
+    </div>
+  </div>
+</section>
+
+<section class="main-content p-t-none">
+<div class="row action-panel-top">
+  <div class="pull-right" tooltip="Add"><i class="action-icon fa fa-plus" ng-click="addLL()"></i></div>
+</div>
+  <div class="m-b-m accordian" data-ng-repeat = "ll in llData">
+  <div class="white-stage" style="overflow:auto; padding:20px">
+    <div class="col-sm-5 col-lg-4">
+      <div class="col-sm-12 text-center">
+         <i class="round-icon-big" ng-class="[settings.ll_icons[ll.type], settings.rent_status[1]]" tooltip="{{rentRef.referencesDataMap.rentStatus[rel.status]}}"></i>
+      </div>
+        <div class="col-sm-12 title-name text-center" data-ng-bind="ll.name">Name</div>
+        <div class="col-sm-12 detail-box">
+          <div class="col-sm-12 status-box text-center" ng-class="settings.text_status[ll.status]"><i class="fa fa-circle"></i>{{ll.status | reverseCode : reference.landlordStatus}}</div>
+          <div class="col-sm-12 text-center control-box">
+            <a data-ng-href="#/ll-details/{{ll.llcode}}"><i class="fa fa-eye"></i>Watch</a>
+            <a href="" ng-click="editLL(ll)"><i class="fa fa-edit"></i>Edit</a>
+          </div>
+        </div>
+    </div>
+    <div class="col-sm-7 col-lg-8 details-box">
+      <div class="col-sm-3 label-text"><label data-ng-bind="'label.rent.dop' | i18n"></label></div><div class="col-sm-9">{{ll.dop | aswaDate}}</div>
+      <div class="col-sm-3 label-text"><label data-ng-bind="'label.rent.dov' | i18n"></label></div><div class="col-sm-9">{{(ll.dov | aswaDate) || '&mdash;'}}</div>
+      <div class="col-sm-3 label-text"><label data-ng-bind="'label.rent.pan' | i18n"></label></div><div class="col-sm-9">{{(ll.pan) || '&mdash;'}}</div>
+       <div class="col-sm-3 label-text"><label data-ng-bind="'label.rent.advance' | i18n"></label></div><div class="col-sm-9">{{(ll.advance | aswaCurrency) || '&mdash;'}}</div>
+        <div class="col-sm-3 label-text"><label data-ng-bind="'label.rent.contact' | i18n"></label></div><div class="col-sm-9">{{(ll.contact) || '&mdash;' }}</div>
+      <div class="col-sm-12 label-text"><label data-ng-bind="'label.rent.address' | i18n"></label><span data-ng-bind-html="ll.address | formatString"></span></div>
+      <div class="col-sm-12 label-text"><label data-ng-bind="'label.rent.comment' | i18n"></label><span>{{ll.comment}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</section>

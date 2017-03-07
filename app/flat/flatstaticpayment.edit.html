@@ -1,0 +1,99 @@
+<form name="flatstaticpaymentdata">
+  <div class="modal-header">
+  <i tooltip="Close" tooltip-placement="right" ng-click="cancel()" class="action-icon-close fa fa-close modal-close-icon pull-right"></i>
+  <h3 class="modal-title">{{passingValues.title}}</h3>
+</div>
+<div class="modal-body">
+	<div class="stage">
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="flatStaticPayment.flatStaticPaymentBO.PAID_DATE" is-open="open.editbillmonth" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.flat.paiddate' | i18n}}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'editbillmonth')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.flat.amount' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.AMOUNT" amount>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+       <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <select tabindex="7" class="form-control" ui-select2="common.select2ClearWithoutSearch" ng-model="flatStaticPayment.flatStaticPaymentBO.MODE" placeholder="{{'placeholder.flat.paymentMode' | i18n}}" ng-change="showMode(flatStaticPayment.flatStaticPaymentBO.MODE);">
+              <option></option>
+              <option data-ng-repeat="item in reference.paymentMode" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6" data-ng-if="mode == 'CH'">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.flat.ch' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.CHEQUE_NUMBER">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6" data-ng-if="mode == 'DD'">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.flat.dd' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.DD_NUMBER">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6" data-ng-if="mode == 'MCH'">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.flat.mch' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.MCH_NUMBER">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6" data-ng-if="mode === 'WIRE'">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.flat.wire' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.WIRETRANSFER_ID">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6" data-ng-if="mode === 'CSH'">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.flat.csh' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.CASH">
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <div class="form-group">
+              <input tabindex="5" type="text" class="form-control text-uppercase" placeholder="{{'placeholder.flat.purpose' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.PURPOSE">
+          </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6" data-ng-if="showReceiptNo">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.flat.receiptno' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.RECEIPT_NUMBER">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control text-uppercase" placeholder="{{'placeholder.flat.contactperson' | i18n}}" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.CONTACT_PERSON">
+          </div>
+        </div>
+      </div>
+
+
+     
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <textarea tabindex="9" name="comment" id="comment" class="form-control" placeholder="Comment" tabindex="1" data-ng-model="flatStaticPayment.flatStaticPaymentBO.COMMENT"></textarea>
+          </div>
+        </div>
+      </div>
+
+	</div>
+</div>
+<div class="modal-footer">
+  <button class="btn camelcase btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn camelcase btn-primary" ng-click="saveFlatstaticpayment()">Save</button>
+</div>
+<input type="hidden" name="medicalbill_id" data-ng-model="flatStaticPayment.flatStaticPaymentBO.id" data-ng-show="isEdit">
+</form>

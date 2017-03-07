@@ -1,0 +1,119 @@
+<section>
+  <div class="row">
+    <div class="col-sm-11">
+      <div class="page-header">
+        <h1><i class="fa fa-building"></i><span data-ng-bind-html="'cart.pageheader' | i18n"></span></h1>
+        <p class="lead" data-ng-bind-html="'cnt.cart.pageheader' | i18n">
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-1 text-right">
+      <div class="row">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-12 bottom-border" /></div>
+    </div>
+  </div>
+</section>
+<section class="main-content p-t-none">
+
+<div class="row">
+  <div class="col-sm-6">
+    
+  <div id="dashboard" class="accordian">
+    <div class="card no-margin">
+        <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add"><i class="action-icon fa fa-plus action-icon-m-t-m" ng-click="addIOWE()"></i></div>
+           <h3 class="table-title" data-ng-bind-template="{{'cnt.rows' | i18n}} {{iowe.ioweBO.length}} | {{'cnt.total' | i18n}} {{currentTotal | aswaCurrency}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small pos-relative">
+              <colgroup>
+                <col class="auto-cell-size p-r-20">
+              </colgroup>
+              <thead>
+              <tr>
+                <th data-ng-bind-html="'cart.tbl.icon' | i18n"></th>
+                <th data-ng-bind-html="'dashboard.tbl.contact' | i18n"></th>
+                <th data-ng-bind-html="'dashboard.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in iowe.ioweBO">
+                <td class="f20 uppercase"><i class="round-icon generic-status-bg-{{rel.status}} fa fa-money" tooltip="{{refData.referencesDataMap.genericStatusTwo[rel.status]}}"></i></td>
+                 <td data-ng-bind="rel.contact"></td>
+                 <td data-ng-bind="rel.amount | aswaCurrency"></td>
+                  <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon fa fa-edit" ng-click="editIOWE(rel)" tooltip="{{'tooltip.edit' | i18n}}"></i>
+                  <i class="action-icon fa fa-close" tooltip="{{'tooltip.trash' | i18n}}"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div  class="show-more text-center" ng-show="mobileBO.mobileData.length > maxSize">
+        <a href="" data-ng-show="hasMoreDataToShow()" data-ng-click="showMoreData()" data-ng-bind-html="'tbl.label.showmore' | i18n"></a>
+        <a href="" data-ng-show="hasMoreDataToHide()" data-ng-click="hideMoreData()" data-ng-bind-html="'tbl.label.showless' | i18n"></a>
+      </div>
+  </div>
+
+  </div>
+  <div class="col-sm-6">
+    
+  <div id="dashboard" class="accordian">
+    <div class="card no-margin">
+        <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add"><i class="action-icon fa fa-plus action-icon-m-t-m" ng-click="addCart()"></i></div>
+           <h3 class="table-title" data-ng-bind-template="{{'cnt.rows' | i18n}} {{cartBO.cartData.length}} | {{'cnt.total' | i18n}} {{currentTotal | aswaCurrency}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small pos-relative">
+              <colgroup>
+                <col class="auto-cell-size p-r-20">
+              </colgroup>
+              <thead>
+              <tr>
+                <th data-ng-bind-html="'cart.tbl.icon' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.orderdate' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.deliverydate' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.cart' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.item' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.status' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.ordernum' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in cartBO.cartData  | limitTo:dataLimit()">
+                <td class="f20 uppercase"><i class="round-icon cart-status-bg-{{rel.status}} fa fa-cart-plus" tooltip="{{getRef.referencesDataMap.cartStatus[rel.status]}}"></i></td>
+                <td data-ng-bind="rel.orderdate | aswaDate"></td>
+                <td data-ng-bind="rel.deliverydate | aswaDate"></td>
+                 <td data-ng-bind="getRef.referencesDataMap.cart[rel.cart]"></td>
+                 <td data-ng-bind="rel.item"></td>
+                 <td data-ng-bind="rel.amount | aswaCurrency"></td>
+                  <td data-ng-bind="getRef.referencesDataMap.cartStatus[rel.status]"></td>
+                   <td data-ng-bind="rel.ordernum"></td>
+                  <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon fa fa-edit" ng-click="editCart(rel)" tooltip="{{'tooltip.edit' | i18n}}"></i>
+                  <i class="action-icon fa fa-close" tooltip="{{'tooltip.trash' | i18n}}"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div  class="show-more text-center" ng-show="mobileBO.mobileData.length > maxSize">
+        <a href="" data-ng-show="hasMoreDataToShow()" data-ng-click="showMoreData()" data-ng-bind-html="'tbl.label.showmore' | i18n"></a>
+        <a href="" data-ng-show="hasMoreDataToHide()" data-ng-click="hideMoreData()" data-ng-bind-html="'tbl.label.showless' | i18n"></a>
+      </div>
+  </div>
+  </div>
+</div>
+
+
+</section>

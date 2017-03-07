@@ -1,0 +1,55 @@
+<section>
+  <div class="row header-container">
+    <div class="col-sm-3">
+      <div>
+        <h1><i class="fa fa-tachometer"></i><span data-ng-bind-html ="'dashboard.pageheader' | i18n"></span></h1>
+      </div>
+    </div>
+    <div class="col-sm-8" style="text-align:right">
+        <ol class="breadcrumb"> 
+          <li class="active"> <strong><i class="fa fa-home"></i> {{'breadcrumb.dashboard' | i18n}}</strong> </li> 
+        </ol> 
+    </div>
+    <div class="col-sm-1 text-right">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+    </div>
+  </div>
+</section>
+
+  <section class="p-t-none" id="panel-stickers">
+    <div class="col-sm-3 no-l-pd no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-one.html'"></div>
+    </div>
+    <div class="col-sm-3  no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-two.html'"></div>
+    </div>
+    <div class="col-sm-3 ">
+      <div ng-include src="'dashboard/containers/panel-three.html'"></div>
+    </div>
+    <div class="col-sm-3 no-l-pd no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-four.html'"></div>
+    </div>
+    <div class="col-sm-3 no-l-pd no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-five.html'"></div>
+    </div>
+    <div class="col-sm-3  no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-six.html'"></div>
+    </div>
+    <div class="col-sm-3 ">
+      <div ng-include src="'dashboard/containers/panel-seven.html'"></div>
+    </div>
+    <div class="col-sm-3 no-l-pd no-r-pd">
+      <div ng-include src="'dashboard/containers/panel-eight.html'"></div>
+    </div>
+  </section>
+
+
+<section class="main-content p-t-none">
+    <div class="col-sm-12 no-l-pd no-r-pd" ng-include src="'dashboard/containers/mobilechartone.html'"></div>
+    <div class="col-sm-12 m-b-l"></div>
+    <div class="col-sm-4 no-l-pd" ng-include src="'dashboard/containers/iowe.html'"></div>
+    <div class="col-sm-4 no-r-pd no-l-pd" ng-include src="'dashboard/containers/owesme.html'"></div>
+    <div class="col-sm-4 no-r-pd" ng-include src="'dashboard/containers/br.html'"></div>
+</section>

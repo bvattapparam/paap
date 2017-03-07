@@ -1,0 +1,92 @@
+<form name="traveldata">
+  <div class="modal-header">
+  <i tooltip="Close" tooltip-placement="right" ng-click="cancel()" class="action-icon-close fa fa-close modal-close-icon pull-right"></i>
+  <h3 class="modal-title"><i class="round-icon fa fa-{{travelRef.referencesDataMap.travelIcon[travel.travelBO.icon]}}" ng-class="settings.travel_status[travel.travelBO.status]"></i> {{passingValues.title}}</h3>
+</div>
+<div class="modal-body">
+	<div class="stage">
+      <div class ="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="1" type="text" class="form-control" placeholder="Source" tabindex="1" data-ng-model="travel.travelBO.source">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input tabindex="2"type="text" class="form-control" placeholder="Destination" tabindex="2" data-ng-model="travel.travelBO.destination">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <!--  <input type="text" name="traveldate" formatteddate id="traveldate" placeholder="Travel date" class="form-control" tabindex="1" data-ng-model="travel.travelBO.traveldate" >-->
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="travel.travelBO.traveldate" is-open="open.traveldate" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="Travel date"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'traveldate')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="4" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="travel.travelBO.bookeddate" is-open="open.bookeddate" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="Booked date"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'bookeddate')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" name="pnr" id="pnr" class="form-control" placeholder="PNR" tabindex="1" data-ng-model="travel.travelBO.pnr">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input tabindex="6" type="text" class="form-control" placeholder="Amount" tabindex="2" data-ng-model="travel.travelBO.amount" amount>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <select tabindex="7" class="form-control" ui-select2="common.select2ClearWithSearch" ng-model="travel.travelBO.icon" placeholder="{{'travel.placeholder.travelicon' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.travelIcon" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <select tabindex="8" class="form-control" ui-select2="common.select2ClearWithSearch" ng-model="travel.travelBO.status" placeholder = "{{'travel.placeholder.travelstatus' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.travelStatus" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <textarea tabindex="9" name="comment" id="comment" class="form-control" placeholder="Comment" tabindex="1" data-ng-model="travel.travelBO.comment"></textarea>
+          </div>
+        </div>
+      </div>
+
+	</div>
+</div>
+<div class="modal-footer">
+  <button class="btn camelcase btn-default" ng-click="cancel(traveldata)">Cancel</button>
+  <button class="btn camelcase btn-primary" ng-click="saveTravel(travel.travelBO)">Save</button>
+</div>
+<input type="hidden" name="travel_id" data-ng-model="travel.travelBO.id" data-ng-show="isEdit">
+</form>

@@ -1,0 +1,71 @@
+<section>
+<div class="row">
+  <div class="col-sm-11">
+    <div class="page-header">
+      <h1><i class="fa fa-plane"></i><span data-ng-bind-html="'ksfe.pageheader' | i18n"></h1>
+      <p class="lead" data-ng-bind-html="'cnt.ksfe.pageheader' | i18n">
+      </p>
+    </div>
+  </div>
+  <div class="col-sm-1 text-right">
+    <div class="row">
+      <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+       <span class="fa fa-refresh fa-spin"></span>
+      </button>
+    </div>
+  </div>
+  <div class="col-sm-12">
+      <div class="col-sm-12 bottom-border" />
+  </div>
+</div>
+</section>
+
+<section class="main-content p-t-none">
+  <div class="col-sm-4">
+    <div class="row accordian m-r-side p-t-m">
+        <div class="col-sm-12 title-name text-center" data-ng-bind="rentBO.llData.name">Name</div>
+        <div class="col-sm-12 detail-box">
+        <div class="col-sm-12 status-box text-center" ng-class="settings.text_status[rentBO.llData.status]">
+          <i class="fa fa-circle"></i>{{ksfeBO.ksfeData.status | reverseCode : reference.genericStatus}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-8">
+    <div class="row accordian p-t-s">
+    <div class="col-lg-12">
+        <div class="pull-right add-new-control"><i class="fa fa-plus-circle"></i> <span ng-click="addData('sm')">Add new data</span></div>
+      <div class="table-responsive white md-tbl-view">
+        <table class="clear-both table table-hover table-full table-full-small">
+          <colgroup>
+            <col class="auto-cell-size p-r-20">
+          </colgroup>
+          <thead>
+          <tr>
+            <th data-ng-bind-html="'ksfe.tbl.month' | i18n"></th>
+            <th data-ng-bind-html="'ksfe.tbl.amount' | i18n"></th>
+            <th data-ng-bind-html="'ksfe.tbl.status' | i18n"></th>
+            <th data-ng-bind-html="'ksfe.tbl.comment' | i18n"></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr data-ng-repeat="rel in ksfeBO.ksfeData | limitTo:dataLimit()">
+            <td class="f20"><i ng-class="settings.generic_status[rel.status]" class="fa fa-check-circle" tooltip="{{ksfeRef.referencesDataMap.genericStatus[rel.status]}}"></i></td>
+            <td data-ng-bind="rel.month | aswaDate"></td>
+            <td data-ng-bind="rel.amount | aswaCurrency"></td>
+            <td data-ng-bind="rel.comment | formatString"></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div  class="show-more text-center" ng-show="ksfeBO.ksfeData.length > maxSize">
+      <a href="" data-ng-show="hasMoreDataToShow()" data-ng-click="showMoreData()" data-ng-bind-html="'tbl.label.showmore' | i18n"></a>
+      <a href="" data-ng-show="hasMoreDataToHide()" data-ng-click="hideMoreData()" data-ng-bind-html="'tbl.label.showless' | i18n"></a>
+    </div>
+
+    </div>
+  </div>
+  </div>
+</section>

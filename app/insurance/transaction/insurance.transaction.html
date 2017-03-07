@@ -1,0 +1,63 @@
+<section>
+  <div class="row header-container">
+    <div class="col-sm-3">
+      <div>
+        <h1><i class="fa fa-money"></i><span data-ng-bind-html ="'insurance.transaction.pageheader' | i18n"></span></h1>
+      </div>
+    </div>
+    <div class="col-sm-8" style="text-align:right">
+        <ol class="breadcrumb"> 
+          <li><a data-ng-href="#/dashboard"><strong><i class="fa fa-home"></i> {{'breadcrumb.dashboard' | i18n}}</strong></a></li> 
+          <li><a data-ng-href="#/insurance"><strong><i class="fa fa-money"></i> {{'breadcrumb.insurance' | i18n}}</strong></a></li>
+          <li class="active"><strong><i class="fa fa-money"></i> {{'breadcrumb.insurance.transaction' | i18n}}</strong></li>
+        </ol> 
+    </div>
+    <div class="col-sm-1 text-right">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+    </div>
+  </div>
+</section>
+
+<section class="main-content p-t-none">
+  <div id="dashboard" class="generic-container">
+    <div class="generic-card no-margin">
+          <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add">
+            <button class="btn btn-sm camelcase btn-primary pull-right text-uppercase" ng-click="addInsuranceTrnx('sm')" ng-bind="'btn.addtransaction' | i18n">Save</button>
+          </div>
+           <h3 class="table-title" ng-bind-template="{{'cnt.rows' | i18n}} {{totalItems}} | {{'cnt.total' | i18n}} {{totalAmount | aswaCurrency}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small">
+              <colgroup>
+                <col class="auto-cell-size">
+              </colgroup>
+              <thead>
+              <tr>
+                <th></th>
+                <th data-ng-bind-html="'insurance.tbl.policyno' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.paiddate' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.paymentmode' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in insuranceTrnxBO.insuranceTrnxData" ng-class="{'selected-row':$index == selectedRow}" ng-click="setClickedRow($index); openPaapWindow($event,rel,'edit');">
+                <td></td>
+                <td data-ng-bind="rel.POLICYNO">TNIS003433</td>
+                <td data-ng-bind="rel.PAID_DATE | aswaDate" class="uppercase">TNIS003433</td>
+                <td data-ng-bind="rel.AMOUNT | aswaCurrency">TNIS003433</td>
+                <td data-ng-bind="getRef.referencesDataMap.paymentMode[rel.PAYMENT_MODE]">TNIS003433</td>
+                <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon-small-secondary fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon-small-secondary fa fa-edit" tooltip="{{'tooltip.edit' | i18n}}" ng-click="editInsuranceTrnx($event,rel)"></i>
+                  <i class="action-icon-small-secondary fa fa-trash" tooltip="{{'tooltip.trash' | i18n}}" ng-click="openPaapWindow($event,'','delete')"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+  </div>
+</section>

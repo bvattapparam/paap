@@ -1,0 +1,73 @@
+<section>
+  <div class="row header-container">
+    <div class="col-sm-3">
+      <div>
+        <h1><i class="fa fa-money"></i><span data-ng-bind-html ="'insurance.pageheader' | i18n"></span></h1>
+      </div>
+    </div>
+    <div class="col-sm-8" style="text-align:right">
+        <ol class="breadcrumb"> 
+          <li class="active"> <strong><i class="fa fa-home"></i> {{'breadcrumb.dashboard' | i18n}}</strong> </li> 
+        </ol> 
+    </div>
+    <div class="col-sm-1 text-right">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="main-content p-t-none">
+  <div id="dashboard" class="generic-container">
+    <div class="generic-card no-margin">
+          <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add">
+            <button class="btn btn-sm camelcase btn-primary pull-right text-uppercase" ng-click="addInsurance('sm')" ng-bind="'btn.addtransaction' | i18n">Save</button>
+          </div>
+           <h3 class="table-title" ng-bind-template="{{'cnt.rows' | i18n}} {{insuranceMasterBO.insuranceData.length}} | {{'cnt.total' | i18n}} {{getGrandTotal.getGrandTotalBO.INSURANCE_POLICY_TOTAL | aswaCurrency}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small">
+              <colgroup>
+                <col class="auto-cell-size">
+              </colgroup>
+              <thead>
+              <tr>
+                <th></th>
+                <th data-ng-bind-html="'insurance.tbl.policyno' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.name' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.sumassured' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.startdate' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.maturitydate' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.policytype' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.premium' | i18n"></th>
+                <th data-ng-bind-html="'insurance.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in insuranceMasterBO.insuranceData" ng-class="{'selected-row':$index == selectedRow}" ng-click="setClickedRow($index)">
+                <td></td>
+                <td>
+                  <a data-ng-href="#/insurance-transaction/{{rel.POLICYNO}}" data-ng-bind="rel.POLICYNO" tooltip="{{'rent.tbl.tootip.clickhere' | i18n}}"></a>
+                </td>
+                <td data-ng-bind="rel.NAME" class="uppercase">TNIS003433</td>
+                <td data-ng-bind="rel.SUM_ASSURED | aswaCurrency">TNIS003433</td>
+
+                <td data-ng-bind="rel.START_DATE | aswaDate">Chennai</td>
+                <td data-ng-bind="rel.MATURITY_DATE | aswaDate">Chennai</td>
+                <td data-ng-bind="getRef.referencesDataMap.policyType[rel.POLICY_TYPE]">Kerala</td>
+                <td data-ng-bind="rel.PREMIUM | aswaCurrency">TNIS003433</td>
+               
+                <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon-small-secondary fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon-small-secondary fa fa-edit" tooltip="{{'tooltip.edit' | i18n}}" ng-click="editInsurance(rel)"></i>
+                  <i class="action-icon-small-secondary fa fa-trash" tooltip="{{'tooltip.trash' | i18n}}" ng-click="showInfoBox('Info', 'generalinfoone', 'sm')"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+  </div>
+</section>

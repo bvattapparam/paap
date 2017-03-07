@@ -1,0 +1,80 @@
+
+
+<section>
+  <div class="row header-container">
+    <div class="col-sm-3">
+      <div>
+        <h1><i class="fa fa-building"></i><span data-ng-bind-html="'rent.pageheader' | i18n"></span></h1>
+      </div>
+    </div>
+    <div class="col-sm-8" style="text-align:right">
+        <ol class="breadcrumb"> 
+          <li class="active"> <strong><i class="fa fa-home"></i> {{'breadcrumb.dashboard' | i18n}}</strong> </li> 
+        </ol> 
+    </div>
+    <div class="col-sm-1 text-right">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+    </div>
+  </div>
+</section>
+
+<section class="main-content p-t-none">
+  <div id="dashboard" class="generic-container">
+    <div class="generic-card no-margin">
+        <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add"><i class="action-icon-primary fa fa-plus" ng-click="addRent('sm')"></i></div>
+           <div class="form-group pull-right actions col-sm-3">
+            <select tabindex="8" class="form-control" ui-select2="common.select2ClearWithoutSearch" data-ng-model="search.status" placeholder = "{{'filter.placeholder.filterstatus' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.rentStatus" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="form-group pull-right actions col-sm-3">
+            <select tabindex="8" class="form-control" ui-select2="common.select2ClearWithoutSearch" data-ng-model="search.llcode" placeholder = "{{'filter.placeholder.landlordname' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.landlordName" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+           <h3 class="table-title" data-ng-bind-template="{{'cnt.rows' | i18n}} {{totalItems}} | {{'cnt.total' | i18n}} {{getGrandTotal.getGrandTotalBO.rent | aswaCurrency}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small pos-relative">
+              <colgroup>
+                <col class="auto-cell-size p-r-20">
+              </colgroup>
+              <thead>
+              <tr>
+                <th data-ng-bind-html="'rent.tbl.icon' | i18n"></th>
+                <th data-ng-bind-html="'rent.tbl.month' | i18n"></th>
+                <th data-ng-bind-html="'rent.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'rent.tbl.landlord' | i18n"></th>
+                <th data-ng-bind-html="'rent.tbl.receipt' | i18n"></th>
+                <th data-ng-bind-html="'rent.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in rentBO.rentData | filter:search | limitTo:dataLimit()">
+                <td class="f20"><i class="round-icon " ng-class="[settings.ll_icons[rel.lltype], settings.rent_status[rel.status]]" tooltip="{{rentRef.referencesDataMap.rentStatus[rel.status]}}"></i></td>
+                <td data-ng-bind="rel.month | aswaDate"></td>
+                 <td data-ng-bind="rel.amount | aswaCurrency"></td>
+                <td><a data-ng-href="#/ll-details/{{rel.llcode}}" data-ng-bind="rel.llcode | reverseCode : reference.landlordName" tooltip="{{'rent.tbl.tootip.clickhere' | i18n}}"></a></td>
+                <td class="f20"><i ng-class="settings.rent_receipt[rel.receipt]" class="fa fa-check-circle" tooltip="{{rentRef.referencesDataMap.rentReceipts[rel.receipt]}}"></i></td>
+                <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon-small-secondary fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon-small-secondary fa fa-edit" ng-click="editRent(rel)" tooltip="{{'tooltip.edit' | i18n}}"></i>
+                  <i class="action-icon-small-secondary fa fa-close" tooltip="{{'tooltip.trash' | i18n}}"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="row">
+        <pagination total-items="totalItems" ng-model="currentPage"  num-pages="numPages" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" rotate="false" ng-change="pageChanged()" items-per-page="limit" first-text="<<" last-text=">>" next-text=">" previous-text="<"></pagination>
+        <ul class="pagination-sm pagination pull-right">
+          <li class="ng-scope disabled"><a href="" ng-click="selectPage(1, $event)" class="ng-binding">Page</a></li>
+          <li class="ng-scope disabled"><span class="ng-binding">{{currentPage}} / {{numPages}}</span></li>
+        </ul>
+      </div>
+  </div>
+</section>

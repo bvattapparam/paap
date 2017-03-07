@@ -1,0 +1,68 @@
+<section>
+  <div class="page-header">
+    <h1><i class="fa fa-building"></i>{{'rent.ll.pageheader' | i18n}}</h1>
+      <p class="lead" data-ng-bind-html="'cnt.rent.ll.details.pageheader' | i18n" />
+  </div>
+</section>
+<section class="main-content p-t-none">
+  <div class="col-sm-4">
+    <div class="row accordian m-r-side p-t-m">
+      <div class="col-sm-12 text-center">
+        <i class="round-icon-big" ng-class="[settings.ll_icons[rentBO.llData.type], settings.rent_status[rentBO.llData.status]]" tooltip="{{rentRef.referencesDataMap.rentStatus[rel.status]}}"></i>
+      </div>
+        <div class="col-sm-12 title-name text-center" data-ng-bind="rentBO.llData.name">Name</div>
+        <div class="col-sm-12 detail-box">
+        <div class="col-sm-12 status-box text-center" ng-class="settings.text_status[rentBO.llData.status]">
+          <i class="fa fa-circle"></i>{{rentBO.llData.status | reverseCode : reference.landlordStatus}}
+        </div>
+        <div class="col-sm-12 text-center control-box">
+          <a data-ng-href="#/ll/"><i class="fa fa-list"></i><span data-ng-bind="'label.rent.link.landlord' | i18n"></span></a> |
+          <a ng-href="#/rent"><i class="fa fa-table"></i><span data-ng-bind="'label.rent.link.renttable' | i18n"></span></a>
+          </div>
+        </div>
+        <div class="col-sm-12 control-box details-box">
+          <div class="col-sm-4 label-text"><label data-ng-bind="'label.rent.totalAmount' | i18n"></label></div><div class="col-sm-8"><span data-ng-bind="totalAmount | aswaCurrency"></span></div>
+          <div class="col-sm-4 label-text"><label data-ng-bind="'label.rent.dop' | i18n"></label></div><div class="col-sm-8">{{rentBO.llData.dop | aswaDate}}</div>
+          <div class="col-sm-4 label-text"><label data-ng-bind="'label.rent.contact' | i18n"></label></div><div class="col-sm-8">{{rentBO.llData.contact}}</div>
+          <div class="col-sm-12 label-text"><label data-ng-bind="'label.rent.address' | i18n"></label><span data-ng-bind-html="rentBO.llData.address | formatString"></span></div>
+          <div class="col-sm-12 label-text"><label data-ng-bind="'label.rent.comment' | i18n"></label><span data-ng-bind-html="rentBO.llData.comment | formatString"></span></div>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-sm-8">
+    <div class="row accordian p-t-m">
+    <div class="col-lg-12">
+      <div class="table-responsive white md-tbl-view">
+        <table class="clear-both table table-hover table-full table-full-small">
+          <colgroup>
+            <col class="auto-cell-size p-r-20">
+          </colgroup>
+          <thead>
+          <tr>
+            <th data-ng-bind-html="'rent.tbl.receipt' | i18n"></th>
+            <th data-ng-bind-html="'rent.tbl.month' | i18n"></th>
+            <th data-ng-bind-html="'rent.tbl.amount' | i18n"></th>
+            <th data-ng-bind-html="'rent.tbl.comment' | i18n"></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr data-ng-repeat="rel in rentBO.rentData | limitTo:dataLimit()">
+            <td class="f20"><i ng-class="settings.rent_receipt[rel.receipt]" class="fa fa-check-circle" tooltip="{{rel.receipt | reverseCode : reference.rentReceipts}}"></i></td>
+            <td data-ng-bind="rel.month | aswaDate">Chennai</td>
+            <td data-ng-bind="rel.amount | aswaCurrency">Kerala</td>
+            <td data-ng-bind="rel.comment | formatString"></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div  class="show-more text-center" ng-show="rentBO.rentData.length > maxSize">
+      <a href="" data-ng-show="hasMoreDataToShow()" data-ng-click="showMoreData()" data-ng-bind-html="'tbl.label.showmore' | i18n"></a>
+      <a href="" data-ng-show="hasMoreDataToHide()" data-ng-click="hideMoreData()" data-ng-bind-html="'tbl.label.showless' | i18n"></a>
+    </div>
+
+    </div>
+  </div>
+  </div>
+</section>

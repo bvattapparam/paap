@@ -1,0 +1,11 @@
+<form name="loginForm">
+  <div class="login-container col-sm-12">
+    <span><i class="fa fa-leaf"></i></span>
+    <div class="row">
+      <div class="form-group col-sm-12 m-t-m">
+          <input tabindex="1" type="password" class="form-control" placeholder = "{{'login.placeholder.passkey' | i18n}}" tabindex="1" data-ng-model="login.loginBO.passkey">
+          <button class="btn btn-sm btn-primary m-t-m col-sm-12" ng-click="getAuthenticate(login.loginBO);">{{'login.btn.label' | i18n}}</button>
+      </div>
+    </div>
+  </div>
+</form>

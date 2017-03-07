@@ -1,0 +1,66 @@
+<section>
+  <div class="row">
+    <div class="col-sm-11">
+      <div class="page-header">
+        <h1><i class="fa fa-building"></i><span data-ng-bind-html="'mobile.pageheader' | i18n"></span></h1>
+        <p class="lead" data-ng-bind-html="'cnt.mobile.pageheader' | i18n">
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-1 text-right">
+      <div class="row">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-12 bottom-border" /></div>
+    </div>
+  </div>
+</section>
+<section class="main-content p-t-none">
+  <div id="dashboard" class="accordian">
+    <div class="card no-margin">
+        <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add"><i class="action-icon fa fa-plus action-icon-m-t-m" ng-click="addMobile()"></i></div>
+         
+          
+           <h3 class="table-title" data-ng-bind-template="{{'cnt.rows' | i18n}} {{rentBO.rentData.length}} | {{'cnt.total' | i18n}} {{getGrandTotal.getGrandTotalBO.rent | aswaCurrency}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small pos-relative">
+              <colgroup>
+                <col class="auto-cell-size p-r-20">
+              </colgroup>
+              <thead>
+              <tr>
+                <th data-ng-bind-html="'mobile.tbl.icon' | i18n"></th>
+                <th data-ng-bind-html="'mobile.tbl.billmonth' | i18n"></th>
+                <th data-ng-bind-html="'mobile.tbl.billno' | i18n"></th>
+                <th data-ng-bind-html="'mobile.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'mobile.tbl.user' | i18n"></th>
+                <th data-ng-bind-html="'mobile.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in mobileBO.mobileData | filter:search | limitTo:dataLimit()">
+                <td class="f20"><i class="round-icon status-active-bg fa fa-mobile" tooltip="{{rentRef.referencesDataMap.rentStatus[rel.status]}}"></i></td>
+                <td data-ng-bind="rel.billmonth | aswaDate"></td>
+                 <td data-ng-bind="rel.billno"></td>
+                 <td data-ng-bind="rel.amount | aswaCurrency"></td>
+                  <td data-ng-bind="rel.user"></td>
+                <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon fa fa-edit" ng-click="editMobile(rel)" tooltip="{{'tooltip.edit' | i18n}}"></i>
+                  <i class="action-icon fa fa-close" tooltip="{{'tooltip.trash' | i18n}}"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div  class="show-more text-center" ng-show="mobileBO.mobileData.length > maxSize">
+        <a href="" data-ng-show="hasMoreDataToShow()" data-ng-click="showMoreData()" data-ng-bind-html="'tbl.label.showmore' | i18n"></a>
+        <a href="" data-ng-show="hasMoreDataToHide()" data-ng-click="hideMoreData()" data-ng-bind-html="'tbl.label.showless' | i18n"></a>
+      </div>
+  </div>
+</section>

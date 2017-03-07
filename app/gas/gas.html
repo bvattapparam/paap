@@ -1,0 +1,74 @@
+
+<section>
+  <div class="page-header">
+    <h1><i class="fa fa-tint"></i>{{'gas.pageheader' | i18n}}</h1>
+      <p class="lead" data-ng-bind-html="'cnt.gas.details.pageheader' | i18n" />
+  </div>
+</section>
+<section class="main-content p-t-none">
+  <div class="accordian ">
+    <div class="no-margin white-stage" style="overflow:auto; padding:20px">
+      <div class="col-sm-4">
+        <div class="col-sm-12 text-center">
+          <img src='../img/gas.png' class="ll-image">
+        </div>
+          <div class="col-sm-12 title-name text-center" data-ng-bind="gasBO.gasAgentDetails.name">Name</div>
+          <div class="col-sm-12 detail-box">
+            <div class="row control-box">
+              <div class="col-sm-5 label-text">Customer ID :</div><div class="col-sm-7">{{(gasBO.gasAgentDetails.customerid) || '&mdash;'}}</div>
+              <div class="col-sm-5 label-text">Phone :</div><div class="col-sm-7">{{(gasBO.gasAgentDetails.phone) || '&mdash;'}}</div>
+              <div class="col-sm-5 label-text">Address :</div><div class="col-sm-7" data-ng-bind-html="(gasBO.gasAgentDetails.address) || '&mdash;' | formatString"></div>
+            </div>
+          </div>
+      </div>
+
+      <div class="col-sm-8 details-box">
+        <div class="table-responsive white md-tbl-view">
+          <div class="pull-right add-new-control"><i class="fa fa-plus-circle"></i> Add new data</div>
+          <table class="clear-both table table-hover table-full table-full-small">
+            <thead>
+            <tr>
+              <th data-ng-bind-html="'gas.tbl.bill' | i18n"></th>
+              <th data-ng-bind-html="'gas.tbl.orderdate' | i18n"></th>
+              <th data-ng-bind-html="'gas.tbl.delivereddate' | i18n"></th>
+              <th data-ng-bind-html="'gas.tbl.orderstatus' | i18n"></th>
+              <th data-ng-bind-html="'gas.tbl.amountpaid' | i18n"></th>
+              <th data-ng-bind-html="'gas.tbl.subamount' | i18n"></th>
+              <th data-ng-bind-html="'gas.tbl.substatus' | i18n"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr data-ng-repeat="rel in gasBO.gasData | limitTo:dataLimit()">
+              <!-- <td class="f20"><i class="round-icon " ng-class="[settings.rent_ll[rel.llcode], settings.rent_status[rel.status]]" tooltip="{{rel.status | reverseCode : reference.rentStatus}}"></i></td> -->
+
+              <td data-ng-bind="rel.bill">Chennai</td>
+              <td data-ng-bind="rel.order_date | aswaDate">Chennai</td>
+              <td data-ng-bind="rel.delivered_date | aswaDate">Kerala</td>
+              <td>
+                <span class="col-sm-12 status-box" ng-class="settings.text_status[rel.order_status]">
+                  <i class="fa fa-circle" tooltip="{{rel.order_status | reverseCode:reference.gasOrderStatus}}" tooltip-placement="top" ></i>
+                </span>
+              </td>
+              <td data-ng-bind="rel.amount_paid | aswaCurrency">Kerala</td>
+              <td data-ng-bind="rel.sub_amount | aswaCurrency">Kerala</td>
+              <td>
+                <span class="col-sm-12 status-box" ng-class="settings.text_status[rel.sub_status]">
+                  <i class="fa fa-circle" tooltip="{{rel.sub_status | reverseCode:reference.gasSubStatus}}" tooltip-placement="top" ></i>
+                </span>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div  class="show-more text-center" ng-show="rentBO.rentData.length > maxSize">
+        <a href="" data-ng-show="hasMoreDataToShow()" data-ng-click="showMoreData()" data-ng-bind-html="'tbl.label.showmore' | i18n"></a>
+        <a href="" data-ng-show="hasMoreDataToHide()" data-ng-click="hideMoreData()" data-ng-bind-html="'tbl.label.showless' | i18n"></a>
+      </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>

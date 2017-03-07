@@ -1,0 +1,98 @@
+<form name="landlorddata">
+  <div class="modal-header">
+  <i tooltip="Close" tooltip-placement="right" ng-click="cancel()" class="action-icon-close fa fa-close modal-close-icon pull-right"></i>
+  <h3 class="modal-title"><i class="round-icon fa fa-{{rentRef.referencesDataMap.landlordTypeIcon[ll.llBO.type]}}" data-ng-class="settings.rent_status[ll.llBO.status]"></i> {{passingValues.title}}</h3>
+</div>
+<div class="modal-body">
+	<div class="stage">
+      
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+                <input data-ng-disabled="isEdit" tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="ll.llBO.dop" is-open="open.dateOne" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.rent.dop' | i18n }}"/>
+                <span class="input-group-btn">
+                    <button data-ng-disabled="isEdit" type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'dateOne')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="ll.llBO.dov" is-open="open.dateTwo" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.rent.dov' | i18n }}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'dateTwo')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" name="pan" id="pnr" class="form-control" placeholder="{{'placeholder.rent.pan' | i18n}}" tabindex="1" data-ng-model="ll.llBO.pan">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input tabindex="6" type="text" class="form-control" placeholder="{{'placeholder.rent.advanceamount' | i18n }}" tabindex="2" data-ng-model="ll.llBO.advance" amount>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" name="name" id="pnr" class="form-control" placeholder="{{'placeholder.rent.name' | i18n}}" tabindex="1" data-ng-model="ll.llBO.name" data-ng-disabled="isEdit">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <select tabindex="7" class="form-control" ui-select2="common.select2ClearWithoutSearch" ng-model="ll.llBO.status" placeholder="{{'rent.placeholder.status' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.landlordStatus" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" name="pnr" id="contact" class="form-control" placeholder="{{'placeholder.rent.contact' | i18n}}" tabindex="1" data-ng-model="ll.llBO.contact">
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <select tabindex="7" class="form-control" ui-select2="common.select2ClearWithoutSearch" ng-model="ll.llBO.type" placeholder="{{'rent.placeholder.lltype' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.landlordTypes" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <textarea tabindex="9" name="address" id="address" class="form-control" placeholder="Address" tabindex="1" data-ng-model="ll.llBO.address"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <textarea tabindex="9" name="comment" id="comment" class="form-control" placeholder="Comment" tabindex="1" data-ng-model="ll.llBO.comment"></textarea>
+          </div>
+        </div>
+      </div>
+
+	</div>
+</div>
+<div class="modal-footer">
+  <button class="btn camelcase btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn camelcase btn-primary" ng-click="saveLandlord(ll.llBO)">Save</button>
+</div>
+<input type="hidden" name="travel_id" data-ng-model="travel.travelBO.id" data-ng-show="isEdit">
+</form>

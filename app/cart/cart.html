@@ -1,0 +1,132 @@
+<section>
+  <div class="row">
+    <div class="col-sm-11">
+      <div class="page-header">
+        <h1><i class="fa fa-building"></i><span data-ng-bind-html="'cart.pageheader' | i18n"></span></h1>
+        <p class="lead" data-ng-bind-html="'cnt.cart.pageheader' | i18n">
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-1 text-right">
+      <div class="row">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="refresh();" tooltip="{{'tooltip.refresh' | i18n}}">
+         <span class="fa fa-refresh fa-spin"></span>
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-12 bottom-border" /></div>
+    </div>
+  </div>
+</section>
+<section>
+<div id="dashboard" class="accordian param-section">
+   <h3 class="title-section">Search Bills</h3>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-xs-3">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="searchParam.searchCriteria.billstartmonth" is-open="open.traveldate" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.medicalbill.search.startmonth' | i18n}}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'traveldate')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="searchParam.searchCriteria.billendmonth" is-open="open.traveldate1" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.medicalbill.search.endmonth' | i18n}}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'traveldate1')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="col-xs-3">
+          <div class="form-group">
+              <select tabindex="7" class="form-control" ui-select2="common.select2ClearWithoutSearch" ng-model="cart.cartBO.cart" placeholder="{{'placeholder.cart.cart' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.cart" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-xs-3">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="searchParam.searchCriteria.billendmonth" is-open="open.traveldate1" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.medicalbill.search.endmonth' | i18n}}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'traveldate1')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 pull-right buttons-section">
+        <button class="btn camelcase btn-default" ng-click="clear()">{{'btn.clear' | i18n}}</button>
+        <button class="btn camelcase btn-primary" ng-click="searchMB()">{{'btn.search' | i18n}}</button>
+      </div>
+    </div>
+</div>
+  
+</section>
+<section class="main-content p-t-none">
+  <div id="dashboard" class="accordian">
+    <div class="card no-margin">
+        <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add"><i class="action-icon fa fa-plus action-icon-m-t-m" ng-click="addCart()"></i></div>
+           <h3 class="table-title" data-ng-bind-template="{{'cnt.rows' | i18n}} {{cartBO.cartData.length}} | {{'cnt.total' | i18n}} {{currentTotal | aswaCurrency}}"></h3>
+            <table class="clear-both table table-hover table-full table-full-small pos-relative">
+              <colgroup>
+                <col class="auto-cell-size p-r-20">
+              </colgroup>
+              <thead>
+              <tr>
+                <th data-ng-bind-html="'cart.tbl.icon' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.orderdate' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.deliverydate' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.cart' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.item' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.status' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.ordernum' | i18n"></th>
+                <th data-ng-bind-html="'cart.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in cartBO.cartData  | limitTo:dataLimit()">
+                <td class="f20 uppercase"><i class="round-icon cart-status-bg-{{rel.status}} fa fa-cart-plus" tooltip="{{getRef.referencesDataMap.cartStatus[rel.status]}}"></i></td>
+                <td data-ng-bind="rel.orderdate | aswaDate"></td>
+                <td data-ng-bind="rel.deliverydate | aswaDate"></td>
+                 <td data-ng-bind="getRef.referencesDataMap.cart[rel.cart]"></td>
+                 <td data-ng-bind="rel.item"></td>
+                 <td data-ng-bind="rel.amount | aswaCurrency"></td>
+                  <td data-ng-bind="getRef.referencesDataMap.cartStatus[rel.status]"></td>
+                   <td data-ng-bind="rel.ordernum"></td>
+                  <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon fa fa-edit" ng-click="editCart(rel)" tooltip="{{'tooltip.edit' | i18n}}"></i>
+                  <i class="action-icon fa fa-close" tooltip="{{'tooltip.trash' | i18n}}"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div  class="show-more text-center" ng-show="mobileBO.mobileData.length > maxSize">
+        <a href="" data-ng-show="hasMoreDataToShow()" data-ng-click="showMoreData()" data-ng-bind-html="'tbl.label.showmore' | i18n"></a>
+        <a href="" data-ng-show="hasMoreDataToHide()" data-ng-click="hideMoreData()" data-ng-bind-html="'tbl.label.showless' | i18n"></a>
+      </div>
+  </div>
+</section>

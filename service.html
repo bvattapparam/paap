@@ -1,0 +1,45 @@
+<div id="dashboard" class="generic-container">
+    <div class="generic-card no-margin">
+          <div class="table-responsive white">
+          <div class="actions pull-right" tooltip="Add">
+          <button class="btn btn-sm camelcase btn-primary pull-right text-uppercase" ng-click="addService(showModuleParam)" ng-bind="'btn.addtransaction' | i18n">Save</button></div>
+           <h3 class="table-title" ng-bind-template="{{'cnt.rows' | i18n}} {{totalItems}} | {{'cnt.total' | i18n}} {{totalAmount | aswaCurrency}} (Consolidated)"> </h3>
+            <table class="clear-both table table-hover table-full table-full-small">
+              <colgroup>
+                <col class="auto-cell-size">
+              </colgroup>
+              <thead>
+              <tr>
+                 <th></th>
+                <th data-ng-bind-html="'carmanager.tbl.car' | i18n"></th>
+                <th data-ng-bind-html="'carmanager.tbl.servicestation' | i18n"></th>
+                <th data-ng-bind-html="'carmanager.tbl.date' | i18n"></th>
+                <th data-ng-bind-html="'carmanager.tbl.amount' | i18n"></th>
+                <th data-ng-bind-html="'carmanager.tbl.action' | i18n"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="rel in carmanagerBO.serviceData" ng-class="{'selected-row':$index == selectedRow}" ng-click="setClickedRow($index)">
+               <td></td>
+                <td data-ng-bind="getRef.referencesDataMap.car[rel.CAR]">Kerala</td>
+                 <td data-ng-bind="rel.SERVICE_STATION">Chennai</td>
+                <td data-ng-bind="rel.DATE | aswaDate">Chennai</td>
+                <td data-ng-bind="rel.AMOUNT | aswaCurrency">Open</td>
+                <td class="f20 ng-binding action comment-content">
+                  <i class="action-icon-small-secondary fa fa-info close-pop" tooltip="{{'tooltip.comment' | i18n}}" popover-template="'common/popover/common.popover.html'" data-ng-model="rel" popover-placement="left"></i>
+                  <i class="action-icon-small-secondary fa fa-edit" tooltip="{{'tooltip.edit' | i18n}}" ng-click="editService(rel,showModuleParam)"></i>
+                  <i class="action-icon-small-secondary fa fa-trash" tooltip="{{'tooltip.trash' | i18n}}" ng-click="showInfoBox('Info', 'generalinfoone', 'sm')"></i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+        <pagination total-items="totalItems" ng-model="carmanagerBO.currentPage"  num-pages="numPages" max-size="maxSize" class="pagination-sm pull-right" boundary-links="true" rotate="false" ng-change="pageChangedvalue()" items-per-page="limit" first-text="<<" last-text=">>" next-text=">" previous-text="<"></pagination>
+        <ul class="pagination-sm pagination pull-right">
+          <li class="ng-scope disabled"><a href="" ng-click="selectPage(1, $event)" class="ng-binding">Page</a></li>
+          <li class="ng-scope disabled"><span class="ng-binding">{{carmanagerBO.currentPage}} / {{numPages}}</span></li>
+        </ul>
+      </div>
+</div>

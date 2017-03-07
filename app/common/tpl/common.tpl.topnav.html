@@ -1,0 +1,79 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-header" data-ng-controller = "headerController">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-4 col-sm-offset-1">
+        <ul class="user-info-menu right-links list-inline list-unstyled notification-menu"> 
+          <li dropdown>
+            <a href="#" class="dropdown-toggle" dropdown-toggle><i class="fa fa-bell-o"></i> <span class="badge badge-danger">{{brLength}}</span> </a>
+            <ul ng-if="brLength > 0" class="dropdown-menu navbar-setting notification-sub-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+              <li icon="md md-blur-on">
+                <span style="display: block; border-left: 1px solid #eee; position: absolute; top: -60px; left: -2px; height: 60px"></span>
+              </li>
+              <li icon="md md-blur-on">
+                <div class="col-sm-4 no-l-pd no-r-pd notification-box" ng-include src="'dashboard/containers/notification.html'"></div>
+              </li>
+             
+            </ul>
+
+          </li>
+
+          <li dropdown>
+            <a href="#" class="dropdown-toggle" dropdown-toggle><i class="fa fa-tasks"></i> <span class="badge badge-info">9</span> </a>
+            <ul class="dropdown-menu navbar-setting notification-sub-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+              <li icon="md md-blur-on">
+                <span style="display: block; border-left: 1px solid #eee; position: absolute; top: -60px; left: -2px; height: 60px"></span>
+              </li>
+              <li icon="md md-blur-on">
+                <a href="#/dashboard" >
+                <span>Mobile bill payment - husband</span></a>
+              </li>
+              <li icon="md md-blur-on">
+                <a href="#/dashboard" >
+                <span>Mobile bill payment - wife</span></a>
+              </li>
+              <li icon="md md-blur-on">
+                <a href="#/dashboard" >
+                <span>Net connection amount payment</span></a>
+              </li>
+              
+              
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-3 text-right">
+        <ul class="user-info-menu list-inline settings-menu"> 
+          <li class="user-profile" dropdown> 
+            <a href="#" dropdown-toggle> 
+              <img src="../img/female.png" alt="user-image" class="img-circle img-inline userpic-32" width="28"> 
+              <span data-ng-bind-template="{{userBO.userData.firstname}} {{userBO.userData.lastname}}"></span> &nbsp;<i class="fa fa-angle-down"></i> 
+            </a> 
+            <ul class="dropdown-menu navbar-setting settings-sub-menu profile-settings" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+              <li icon="md md-blur-on">
+              <img src='../img/female.png' class="ll-image">
+              </li>
+              <li icon="md md-blur-on">
+                <a href="#/dashboard" >
+                <i class="fa fa-key"></i><span data-ng-bind-html="'menu.passkey-reset' | i18n"></span></a>
+              </li>
+              <li icon="md md-blur-on" href="#/dashboard">
+                <a href="#/dashboard" >
+                <i class="fa fa-close"></i><span data-ng-bind-html="'menu.logout' | i18n" ng-click="logout()"></span></a>
+              </li>
+              <li icon="md md-blur-on">
+                <div class="lang-btn">
+                    <div class="btn-group language-selector">
+                      <label uncheckable="" btn-radio="'Left'" ng-model="radioModel" ng-click="changeLanguage('tm','Left')" class="btn btn-xs btn-success ng-pristine ng-untouched ng-valid" data-ng-bind="'setting.language.malayalam' | i18n"></label>
+                      <label uncheckable="" btn-radio="'Right'" ng-model="radioModel" ng-click="changeLanguage('en','Right')" class="btn btn-xs btn-success ng-pristine ng-untouched ng-valid active" data-ng-bind="'setting.language.english' | i18n"></label>
+                   </div>
+                </div>
+              </li>
+            </ul>
+          </li> 
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

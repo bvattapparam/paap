@@ -1,0 +1,60 @@
+<form name="mobiledata">
+  <div class="modal-header">
+  <i tooltip="Close" tooltip-placement="right" ng-click="cancel()" class="action-icon-close fa fa-close modal-close-icon pull-right"></i>
+  <h3 class="modal-title">{{passingValues.title}}</h3>
+</div>
+<div class="modal-body">
+	<div class="stage">
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="mobile.mobileBO.month" is-open="open.traveldate" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.mobile.billmonth' | i18n}}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'traveldate')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.mobile.amount' | i18n}}" tabindex="1" data-ng-model="mobile.mobileBO.amount" amount>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.mobile.billno' | i18n}}" tabindex="1" data-ng-model="mobile.mobileBO.billno">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <select tabindex="7" class="form-control" ui-select2="common.select2ClearWithoutSearch" ng-model="mobile.mobileBO.user" placeholder="{{'placeholder.mobile.user' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.mobileusers" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+     
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <textarea tabindex="9" name="comment" id="comment" class="form-control" placeholder="Comment" tabindex="1" data-ng-model="rent.rentBO.comment"></textarea>
+          </div>
+        </div>
+      </div>
+
+	</div>
+</div>
+<div class="modal-footer">
+  <button class="btn camelcase btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn camelcase btn-primary" ng-click="saveMobile()">Save</button>
+</div>
+<input type="hidden" name="mobile_id" data-ng-model="mobile.mobileBO.id" data-ng-show="isEdit">
+</form>

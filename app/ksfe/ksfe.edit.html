@@ -1,0 +1,44 @@
+<form name="ksfedata">
+  <div class="modal-header">
+  <i tooltip="Close" tooltip-placement="right" ng-click="cancel()" class="action-icon-close fa fa-close modal-close-icon pull-right"></i>
+  <h3 class="modal-title"> {{passingValues.title}}</h3>
+</div>
+<div class="modal-body">
+	<div class="stage">
+      <div class ="row">        
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <!--  <input type="text" name="traveldate" formatteddate id="traveldate" placeholder="Travel date" class="form-control" tabindex="1" data-ng-model="travel.travelBO.traveldate" >-->
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="ksfe.ksfeBO.month" is-open="open.traveldate" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'ksfe.edit.placeholder.month' | i18n}}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'traveldate')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input tabindex="6" type="text" class="form-control" placeholder="{{'ksfe.edit.placeholder.amount' | i18n}}" tabindex="2" data-ng-model="ksfe.ksfeBO.amount" amount>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <select tabindex="8" class="form-control" ui-select2="common.select2ClearWithSearch" ng-model="ksfe.ksfeBO.status" placeholder = "{{'ksfe.edit.placeholder.status' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.genericStatus" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+	</div>
+</div>
+<div class="modal-footer">
+  <button class="btn camelcase btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn camelcase btn-primary" ng-click="saveBR(br.brBO)">Save</button>
+</div>
+<input type="hidden" name="id" data-ng-model="br.brBO.id" data-ng-show="isEdit">
+</form>

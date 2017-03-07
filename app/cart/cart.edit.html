@@ -1,0 +1,82 @@
+<form name="cartdata">
+  <div class="modal-header">
+  <i tooltip="Close" tooltip-placement="right" ng-click="cancel()" class="action-icon-close fa fa-close modal-close-icon pull-right"></i>
+  <h3 class="modal-title">{{passingValues.title}}</h3>
+</div>
+<div class="modal-body">
+	<div class="stage">
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="cart.cartBO.orderdate" is-open="open.orderdate" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.cart.orderdate' | i18n}}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'orderdate')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+                <input tabindex="3" type="text" ng-bootstrap-fix class="form-control" readonly datetime-picker="dd-MMM-yyyy" ng-model="cart.cartBO.deliverydate" is-open="open.deliverydate" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-on-date-selection="true" datepicker-append-to-body="true" placeholder="{{'placeholder.cart.deliverydate' | i18n}}"/>
+                <span class="input-group-btn">
+                    <button type="button" class="date-input btn btn-default" ng-click="openCalendar($event, 'deliverydate')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <select tabindex="7" class="form-control" ui-select2="common.select2ClearWithoutSearch" ng-model="cart.cartBO.cart" placeholder="{{'placeholder.cart.cart' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.cart" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+
+         <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <select tabindex="7" class="form-control" ui-select2="common.select2ClearWithoutSearch" ng-model="cart.cartBO.status" placeholder="{{'placeholder.cart.cartstatus' | i18n}}">
+              <option></option>
+              <option data-ng-repeat="item in reference.cartStatus" value="{{item.code}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.cart.amount' | i18n}}" tabindex="1" data-ng-model="cart.cartBO.amount" amount>
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.cart.item' | i18n}}" tabindex="1" data-ng-model="cart.cartBO.item">
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <div class="form-group">
+              <input tabindex="5" type="text" class="form-control" placeholder="{{'placeholder.cart.ordernum' | i18n}}" tabindex="1" data-ng-model="cart.cartBO.ordernum">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <textarea tabindex="9" name="comment" id="comment" class="form-control" placeholder="Comment" tabindex="1" data-ng-model="cart.cartBO.comment"></textarea>
+          </div>
+        </div>
+      </div>
+
+	</div>
+</div>
+<div class="modal-footer">
+  <button class="btn camelcase btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn camelcase btn-primary" ng-click="saveCart()">Save</button>
+</div>
+<input type="hidden" name="cart_id" data-ng-model="cart.cartBO.id" data-ng-show="isEdit">
+</form>
